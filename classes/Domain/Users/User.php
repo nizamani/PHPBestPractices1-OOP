@@ -1,9 +1,6 @@
 <?php
 namespace PhpOOProject\Domain\Users;
 
-use PhpOOProject\Domain\Restaurants\RestaurantFactory;
-use PhpOOProject\Domain\Foods\FoodFactory;
-
 class User
 {
     // region vars

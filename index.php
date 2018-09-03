@@ -22,18 +22,24 @@ global $resturants;
 global $foods;
 
 // set user values from db
-$userObject->setName($users[0]["name"]);
-$userObject->setAge($users[0]["age"]);
+$userRowNumber = 1;
+$userObject->setName($users[$userRowNumber]["name"]);
+$userObject->setAge($users[$userRowNumber]["age"]);
 
 // get user's resturant and favorite food ids
-$favoriteFoodId = $users[0]["favoriteFood"];
-$favoriteResturantId = $users[0]["favoriteRestaurant"];
+$favoriteFoodRowNumber = array_search($users[$userRowNumber]["favoriteFood"], array_column($foods, "id"));
+$favoriteResturantRowNumber = array_search(
+    $users[$userRowNumber]["favoriteRestaurant"],
+    array_column($resturants, "id")
+);
+
+// get favorite restaurant and favorite food ids
 
 // set favorite resturant values to favorite resturant object
-$restaurantObject->setName($resturants[$favoriteResturantId]["name"]);
+$restaurantObject->setName($resturants[$favoriteResturantRowNumber]["name"]);
 
 // set favorite food values to food object
-$foodObject->setName($foods[$favoriteFoodId]["name"]);
+$foodObject->setName($foods[$favoriteFoodRowNumber]["name"]);
 
 // set values to user using food and resturant objects
 $userObject->setFavoriteRestaurant($restaurantObject->getName());
