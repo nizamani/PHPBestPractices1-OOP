@@ -1,10 +1,10 @@
 <?php
-require_once("config/autoloader.php");
+require_once("includes/setup.php");
 
-use PHPBestPractices1OOP\Domain\Router\Router;
+use PHPBestPractices1OOP\Domain\Mlaphp\Router;
 
 // todo set project url at the top
-$projectUrl = "PHPBestPractices1OOP";
+$projectUrl = "studenthome";
 
 // set up the router
 $pagesDir = basename(dirname(__DIR__) . "/pages");
@@ -21,3 +21,7 @@ $route = $router->match($path);
 
 // require the page script
 require $route;
+
+// invoke controller and send response
+$response = $controller->__invoke();
+$response->send();

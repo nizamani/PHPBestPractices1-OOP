@@ -1,6 +1,8 @@
 <?php
 namespace PHPBestPractices1OOP\Controller;
 
+use PHPBestPractices1OOP\Domain\Mlaphp\Request;
+use PHPBestPractices1OOP\Domain\Mlaphp\Response;
 use PHPBestPractices1OOP\Domain\Users\UserFactory;
 use PHPBestPractices1OOP\Domain\Restaurants\RestaurantFactory;
 use PHPBestPractices1OOP\Domain\Foods\FoodFactory;
@@ -23,16 +25,23 @@ class DisplayUserInformationPage
     private $foods;
 
     /**
+     * @var Response
+     */
+    private $response;
+
+    /**
      * DisplayUserInformationPage constructor.
      * @param array $users
      * @param array $restaurants
      * @param array $foods
+     * @param $response
      */
-    public function __construct($users, $restaurants, $foods)
+    public function __construct($users, $restaurants, $foods, $response)
     {
         $this->users = $users;
         $this->restaurants = $restaurants;
         $this->foods = $foods;
+        $this->response = $response;
     }
 
     public function __invoke()
@@ -67,9 +76,17 @@ class DisplayUserInformationPage
         $userObject->setFavoriteRestaurant($restaurantObject->getName());
         $userObject->setFavoriteFood($foodObject->getName());
 
-        // display
-        echo "User's name is ".$userObject->getName().", age is ".$userObject->getAge()."<br>";
-        echo "Favorite restaurant is ".$userObject->getFavoriteResturant()." favorite food is ".$userObject->getFavoriteFood();
+        // response with vars
+        $this->response->setView('displayUserInformation/index.php');
+        $this->response->setVars(
+            array(
+                "name" => $userObject->getName(),
+                "age" => $userObject->getAge(),
+                "restaurant" => $userObject->getFavoriteResturant(),
+                "food" => $userObject->getFavoriteFood()
+                )
+        );
 
+        return $this->response;
     }
 }

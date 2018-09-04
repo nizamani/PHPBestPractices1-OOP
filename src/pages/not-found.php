@@ -1,8 +1,15 @@
 <?php
 $basePath = dirname(__DIR__) . DIRECTORY_SEPARATOR;
-require_once($basePath."/config/autoloader.php");
 
+use PHPBestPractices1OOP\Domain\Mlaphp\Response;
+use PHPBestPractices1OOP\Domain\Mlaphp\Request;
 use PHPBestPractices1OOP\Controller\NotFoundPage;
 
-$controller = new NotFoundPage();
-$controller->__invoke();
+// dependencies
+$request = new Request($GLOBALS);
+$response = new Response('views');
+
+$controller = new NotFoundPage(
+    $request,
+    $response
+);
