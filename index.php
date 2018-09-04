@@ -1,11 +1,7 @@
 <?php
+error_reporting(E_ALL);
 require_once("fakedatabase/db.php");
-include_once("classes/Domain/Users/User.php");
-include_once("classes/Domain/Users/UserFactory.php");
-include_once("classes/Domain/Restaurants/Restaurant.php");
-include_once("classes/Domain/Restaurants/RestaurantFactory.php");
-include_once("classes/Domain/Foods/Food.php");
-include_once("classes/Domain/Foods/FoodFactory.php");
+require_once("config/autoloader.php");
 
 use PhpOOProject\Domain\Users\UserFactory;
 use PhpOOProject\Domain\Restaurants\RestaurantFactory;
@@ -15,11 +11,6 @@ use PhpOOProject\Domain\Foods\FoodFactory;
 $userObject = UserFactory::createUser();
 $restaurantObject = RestaurantFactory::createResturant();
 $foodObject = FoodFactory::createFood();
-
-// fetch variables from db.php
-global $users;
-global $resturants;
-global $foods;
 
 // set user values from db
 $userRowNumber = 1;
