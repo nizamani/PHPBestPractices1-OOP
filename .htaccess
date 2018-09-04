@@ -1,0 +1,14 @@
+# enable rewriting
+RewriteEngine On
+
+# turn empty requests into requests for the "front.php"
+# bootstrap script, keeping the query string intact
+RewriteRule ^$ front.php [QSA]
+
+# for all files and dirs not in the document root,
+# reroute to the "front.php" bootstrap script,
+# keeping the query string intact, and making this
+# the last rewrite rule
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ front.php [QSA,L]

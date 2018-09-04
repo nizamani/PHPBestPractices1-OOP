@@ -1,5 +1,5 @@
 <?php
-namespace PhpOOProject\Domain\Users;
+namespace PHPBestPractices1OOP\Domain\Users;
 
 class User
 {

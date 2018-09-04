@@ -1,5 +1,5 @@
 <?php
-namespace PhpOOProject\Domain\Restaurants;
+namespace PHPBestPractices1OOP\Domain\Restaurants;
 
 class Restaurant
 {
