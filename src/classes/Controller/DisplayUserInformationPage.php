@@ -39,13 +39,13 @@ class DisplayUserInformationPage
 
     /**
      * DisplayUserInformationPage constructor.
+     * @param Request $request
+     * @param Response $response
      * @param UsersTransactions $usersTransactions
      * @param RestaurantsTransactions $restaurantsTransactions
      * @param FoodsTransactions $foodsTransactions
-     * @param Request $request
-     * @param Response $response
      */
-    public function __construct($usersTransactions, $restaurantsTransactions, $foodsTransactions, $request, $response)
+    public function __construct($request, $response, $usersTransactions, $restaurantsTransactions, $foodsTransactions)
     {
         $this->response = $response;
         $this->request = $request;
@@ -62,7 +62,7 @@ class DisplayUserInformationPage
         $foodObject = FoodFactory::createFood();
 
         // get user on row 1 from db.php
-        $userRow = $this->usersTransactions->getUserById(1);
+        $userRow = $this->usersTransactions->getUserById(2);
 
         // success in getting user's row from db, set user's properties for display
         if ($userRow["success"] === true) {

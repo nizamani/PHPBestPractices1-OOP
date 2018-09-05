@@ -14,9 +14,9 @@ $restaurantsTransactions = new RestaurantsTransactions($resturants);
 $foodsTransactions = new FoodsTransactions($foods);
 
 $controller = new DisplayUserInformationPage(
+    $request,
+    $response,
     $usersTransactions,
     $restaurantsTransactions,
-    $foodsTransactions,
-    $request,
-    $response
+    $foodsTransactions
 );
