@@ -1,15 +1,15 @@
 <?php
 require_once("fakedatabase/db.php");
 require_once("includes/setup.php");
+require_once("includes/services.php");
 
 use PHPBestPractices1OOP\Router\Router;
 
 // todo set project url at the top
 $projectUrl = "studenthome";
 
-// set up the router
-$pagesDir = basename(dirname(__DIR__) . "/pages");
-$router = new Router($pagesDir);
+// get the shared router service
+$router = $di->get('router');
 
 // set routes
 $router->setRoutes(array(
@@ -20,8 +20,14 @@ $router->setRoutes(array(
 $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $route = $router->match($path);
 
-// require the page script
-require $route;
+// container service, or page script?
+if ($di->has($route)) {
+    // create a new $controller instance
+    $controller = $di->newInstance($route);
+} else {
+    // require the page script
+    require $route;
+}
 
 // invoke controller and send response
 $response = $controller->__invoke();
