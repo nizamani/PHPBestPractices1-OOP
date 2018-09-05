@@ -1,4 +1,5 @@
 <?php
+require_once("fakedatabase/db.php");
 require_once("includes/setup.php");
 
 use PHPBestPractices1OOP\Domain\Mlaphp\Router;
