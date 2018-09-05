@@ -5,7 +5,7 @@
  * @copyright 2014-2016 Paul M. Jones <pmjones88@gmail.com>
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
-namespace PHPBestPractices1OOP\Domain\Router;
+namespace PHPBestPractices1OOP\Router;
 
 use RuntimeException;
 /**

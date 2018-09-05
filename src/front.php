@@ -2,7 +2,7 @@
 require_once("fakedatabase/db.php");
 require_once("includes/setup.php");
 
-use PHPBestPractices1OOP\Domain\Mlaphp\Router;
+use PHPBestPractices1OOP\Router\Router;
 
 // todo set project url at the top
 $projectUrl = "studenthome";

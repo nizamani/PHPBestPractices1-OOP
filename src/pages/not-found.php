@@ -1,8 +1,8 @@
 <?php
 $basePath = dirname(__DIR__) . DIRECTORY_SEPARATOR;
 
-use PHPBestPractices1OOP\Domain\Mlaphp\Response;
-use PHPBestPractices1OOP\Domain\Mlaphp\Request;
+use PHPBestPractices1OOP\Response\Response;
+use PHPBestPractices1OOP\Request\Request;
 use PHPBestPractices1OOP\Controller\NotFoundPage;
 
 // dependencies

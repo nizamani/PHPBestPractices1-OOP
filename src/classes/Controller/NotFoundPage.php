@@ -1,8 +1,8 @@
 <?php
 namespace PHPBestPractices1OOP\Controller;
 
-use PHPBestPractices1OOP\Domain\Mlaphp\Response;
-use PHPBestPractices1OOP\Domain\Mlaphp\Request;
+use PHPBestPractices1OOP\Response\Response;
+use PHPBestPractices1OOP\Request\Request;
 
 class NotFoundPage
 {

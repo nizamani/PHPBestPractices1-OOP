@@ -1,8 +1,7 @@
 <?php
 namespace PHPBestPractices1OOP\Controller;
 
-use PHPBestPractices1OOP\Domain\Mlaphp\Request;
-use PHPBestPractices1OOP\Domain\Mlaphp\Response;
+use PHPBestPractices1OOP\Response\Response;
 use PHPBestPractices1OOP\Domain\Users\UserFactory;
 use PHPBestPractices1OOP\Domain\Restaurants\RestaurantFactory;
 use PHPBestPractices1OOP\Domain\Foods\FoodFactory;
@@ -34,7 +33,7 @@ class DisplayUserInformationPage
      * @param array $users
      * @param array $restaurants
      * @param array $foods
-     * @param $response
+     * @param Response $response
      */
     public function __construct($users, $restaurants, $foods, $response)
     {

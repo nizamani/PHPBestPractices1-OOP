@@ -1,5 +1,5 @@
 <?php
-use PHPBestPractices1OOP\Domain\Mlaphp\Response;
+use PHPBestPractices1OOP\Response\Response;
 use PHPBestPractices1OOP\Controller\DisplayUserInformationPage;
 
 // dependencies
