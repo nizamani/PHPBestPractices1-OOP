@@ -33,7 +33,7 @@ class Router
      *
      * @var string
      */
-    protected $not_found_route = '/not-found.php';
+    protected $not_found_route = '/notFound/index.php';
     /**
      * The path to the pages directory.
      *
@@ -175,7 +175,7 @@ class Router
      * exists in the pages directory and is readable.
      *
      * @param string $route The matched route.
-     * @return string The real path if it exists, or the not-found route if it
+     * @return string The real path if it exists, or the notFound route if it
      * does not.
      * @throws RuntimeException when the route is a file but no pages directory
      * is specified.

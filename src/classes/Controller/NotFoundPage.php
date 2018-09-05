@@ -34,7 +34,7 @@ class NotFoundPage
             PHP_URL_PATH
         );
 
-        $this->response->setView('not-found/index.php');
+        $this->response->setView('notFound/index.php');
         $this->response->setVars(array(
             'urlPath' => $urlPath,
         ));
