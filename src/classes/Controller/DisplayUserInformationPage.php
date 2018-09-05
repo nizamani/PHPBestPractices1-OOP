@@ -1,6 +1,7 @@
 <?php
 namespace PHPBestPractices1OOP\Controller;
 
+use PHPBestPractices1OOP\Request\Request;
 use PHPBestPractices1OOP\Response\Response;
 use PHPBestPractices1OOP\Domain\Users\UserFactory;
 use PHPBestPractices1OOP\Domain\Restaurants\RestaurantFactory;
@@ -29,18 +30,25 @@ class DisplayUserInformationPage
     private $response;
 
     /**
+     * @var Request
+     */
+    private $request;
+
+    /**
      * DisplayUserInformationPage constructor.
      * @param array $users
      * @param array $restaurants
      * @param array $foods
+     * @param Request $request
      * @param Response $response
      */
-    public function __construct($users, $restaurants, $foods, $response)
+    public function __construct($users, $restaurants, $foods, $request, $response)
     {
         $this->users = $users;
         $this->restaurants = $restaurants;
         $this->foods = $foods;
         $this->response = $response;
+        $this->request = $request;
     }
 
     public function __invoke()
