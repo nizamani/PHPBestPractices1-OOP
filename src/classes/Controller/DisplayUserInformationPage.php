@@ -1,6 +1,10 @@
 <?php
 namespace PHPBestPractices1OOP\Controller;
 
+use PHPBestPractices1OOP\Domain\FoodsTransactions\FoodsTransactions;
+use PHPBestPractices1OOP\Domain\RestaurantsTransactions\RestaurantsTransactions;
+use PHPBestPractices1OOP\Domain\Users\User;
+use PHPBestPractices1OOP\Domain\UsersTransactions\UsersTransactions;
 use PHPBestPractices1OOP\Request\Request;
 use PHPBestPractices1OOP\Response\Response;
 use PHPBestPractices1OOP\Domain\Users\UserFactory;
@@ -35,20 +39,31 @@ class DisplayUserInformationPage
     private $request;
 
     /**
+     * @var UsersTransactions
+     */
+    private $usersTransactions;
+
+    /**
+     * @var
+     */
+    private $restaurantsTransactions;
+    private $foodsTransactions;
+
+    /**
      * DisplayUserInformationPage constructor.
-     * @param array $users
-     * @param array $restaurants
-     * @param array $foods
+     * @param UsersTransactions $usersTransactions
+     * @param RestaurantsTransactions $restaurantsTransactions
+     * @param FoodsTransactions $foodsTransactions
      * @param Request $request
      * @param Response $response
      */
-    public function __construct($users, $restaurants, $foods, $request, $response)
+    public function __construct($usersTransactions, $restaurantsTransactions, $foodsTransactions, $request, $response)
     {
-        $this->users = $users;
-        $this->restaurants = $restaurants;
-        $this->foods = $foods;
         $this->response = $response;
         $this->request = $request;
+        $this->usersTransactions = $usersTransactions;
+        $this->restaurantsTransactions = $restaurantsTransactions;
+        $this->foodsTransactions = $foodsTransactions;
     }
 
     public function __invoke()
@@ -58,30 +73,39 @@ class DisplayUserInformationPage
         $restaurantObject = RestaurantFactory::createResturant();
         $foodObject = FoodFactory::createFood();
 
-        // set user values from db
-        $userRowNumber = 1;
-        $userObject->setName($this->users[$userRowNumber]["name"]);
-        $userObject->setAge($this->users[$userRowNumber]["age"]);
+        // get user on row 1 from db.php
+        $userRow = $this->usersTransactions->getUserById(1);
 
-        // get user's resturant and favorite food ids
-        $favoriteFoodRowNumber = array_search(
-            $this->users[$userRowNumber]["favoriteFood"],
-            array_column($this->foods, "id")
-        );
-        $favoriteResturantRowNumber = array_search(
-            $this->users[$userRowNumber]["favoriteRestaurant"],
-            array_column($this->restaurants, "id")
-        );
+        // success in getting user's row from db, set user's properties for display
+        if ($userRow["success"] === true) {
+            $hasError = false;
 
-        // set favorite resturant values to favorite resturant object
-        $restaurantObject->setName($this->restaurants[$favoriteResturantRowNumber]["name"]);
+            // get user's resturant and favorite food ids
+            $userFavoriteRestaurantRow =
+                $this->restaurantsTransactions->getRestaurantById($userRow["userRow"]["favoriteFood"]);
+            $userFavoriteFoodRow = $this->foodsTransactions->getFoodById($userRow["userRow"]["favoriteRestaurant"]);
 
-        // set favorite food values to food object
-        $foodObject->setName($this->foods[$favoriteFoodRowNumber]["name"]);
+            $userObject->setName($userRow["userRow"]["name"]);
+            $userObject->setAge($userRow["userRow"]["age"]);
 
-        // set values to user using food and resturant objects
-        $userObject->setFavoriteRestaurant($restaurantObject->getName());
-        $userObject->setFavoriteFood($foodObject->getName());
+            // success in getting favorite restaurant, set favorite restaurant namme to favorite resturant object
+            if ($userFavoriteRestaurantRow["success"] === true) {
+                $restaurantObject->setName($userFavoriteRestaurantRow["restaurantRow"]["name"]);
+            }
+
+            // success in getting favorite food, set favorite food values to food object
+            if ($userFavoriteFoodRow["success"] === true) {
+                $foodObject->setName($userFavoriteFoodRow["foodRow"]["name"]);
+            }
+
+            // set values to user using food and resturant objects
+            $userObject->setFavoriteRestaurant($restaurantObject->getName());
+            $userObject->setFavoriteFood($foodObject->getName());
+
+            // else problem getting user from db
+        } else {
+            $hasError = true;
+        }
 
         // response with vars
         $this->response->setView('displayUserInformation/index.php');
@@ -90,8 +114,9 @@ class DisplayUserInformationPage
                 "name" => $userObject->getName(),
                 "age" => $userObject->getAge(),
                 "restaurant" => $userObject->getFavoriteResturant(),
-                "food" => $userObject->getFavoriteFood()
-                )
+                "food" => $userObject->getFavoriteFood(),
+                "hasError" => $hasError
+            )
         );
 
         return $this->response;

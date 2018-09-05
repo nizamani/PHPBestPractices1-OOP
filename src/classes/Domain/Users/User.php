@@ -8,22 +8,22 @@ class User
     /**
      * @var string
      */
-    private $name;
+    private $name = null;
 
     /**
      * @var int
      */
-    private $age;
+    private $age = null;
 
     /**
      * @var int
      */
-    private $favoriteRestaurant;
+    private $favoriteRestaurant = null;
 
     /**
      * @var int
      */
-    private $favoriteFood;
+    private $favoriteFood = null;
 
     // endregion
 
