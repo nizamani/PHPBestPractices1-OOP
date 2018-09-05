@@ -3,7 +3,6 @@ namespace PHPBestPractices1OOP\Controller;
 
 use PHPBestPractices1OOP\Domain\FoodsTransactions\FoodsTransactions;
 use PHPBestPractices1OOP\Domain\RestaurantsTransactions\RestaurantsTransactions;
-use PHPBestPractices1OOP\Domain\Users\User;
 use PHPBestPractices1OOP\Domain\UsersTransactions\UsersTransactions;
 use PHPBestPractices1OOP\Request\Request;
 use PHPBestPractices1OOP\Response\Response;
@@ -13,21 +12,6 @@ use PHPBestPractices1OOP\Domain\Foods\FoodFactory;
 
 class DisplayUserInformationPage
 {
-    /**
-     * @var array
-     */
-    private $users;
-
-    /**
-     * @var array
-     */
-    private $restaurants;
-
-    /**
-     * @var array
-     */
-    private $foods;
-
     /**
      * @var Response
      */
@@ -44,9 +28,13 @@ class DisplayUserInformationPage
     private $usersTransactions;
 
     /**
-     * @var
+     * @var RestaurantsTransactions
      */
     private $restaurantsTransactions;
+
+    /**
+     * @var FoodsTransactions
+     */
     private $foodsTransactions;
 
     /**
