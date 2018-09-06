@@ -7,7 +7,7 @@ $di->set('router', function () use ($di) {
     $router->setRoutes(array());
     $router->setRoutes(array(
         // add a route that points to a container service name
-        "/displayUserInformation" => "Controller\DisplayUserInformationPage",
+        "/displaySingleUser/" => "Controller\DisplayUserInformationPage",
     ));
 
     return $router;
