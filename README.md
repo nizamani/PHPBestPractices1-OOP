@@ -1,28 +1,30 @@
 # PHP Example App: OOP and Some Other Best Practices
 
 
-## What is this?
+## Overview
 
-The goal of this project is to create a very basic web app in PHP that follows leading standards in regards to OOP; we hope it will eventually become a good way for beginners (and ourselves) to learn OOP and some other best PHP practices. We plan on creating additional projects that will highlight other best practices.
+The goal of this project is to create a very basic example web app in PHP that follows leading standards primarily regarding OOP, along with some other best practices. We hope it will eventually become a good way for other OOP PHP beginners to learn OOP and some other best PHP practices. We plan on creating additional projects that will highlight other best practices in PHP.
 
-It is well worth stating though: there are *many* ways to program great applications. OOP is not the only way, and in fact the authors of this project have been using other paradigms in their web app. They created this example app to help themselves learn and improve their OOP knowledge.
+A primary source of information and a highly recommended book is “Modernizing Legacy Applications in PHP” by Paul Jones.
 
-
-## How to run the project
-
-You’ll need what’s called a “server” with PHP running on your machine. A simple way to accomplish this is using a tool called XAMPP. (Since we’re talking about best practices, note that using XAMPP while developing is probably no longer considered a best practice in cutting edge PHP. It is likely the quickest way to get a server running PHP up though. Vagrant and Docker are the newer tools in this realm you may want to look into, but that is currently outside of the scope of this project.)
+It is well worth stating: there are *many* ways to program great applications. OOP is not the only way, and in fact the authors of this project have been using other paradigms in their web app. They created this example app to help themselves learn and improve their OOP knowledge.
 
 
-## Fake Database
+## How to run
 
-In order to make using and learning from this project as easy as possible, we have not included a real database. Instead, we have created a bit of a fake database by putting some data into PHP arrays. In the future we're thinking we'll fork this project and add a MySQL database.
+You’ll need what’s called a “server” with PHP running on your machine. A simple way to accomplish this is using a tool called XAMPP. (Since we’re talking about best practices, note that using XAMPP for local development is probably no longer considered a best practice in cutting edge PHP. It is likely the quickest way to get a server running PHP up though. Vagrant and Docker are the newer tools in this realm you may want to look into, but that is currently outside of the scope of this project.)
+
+After you have a server, copy the contents of /src from this project into the root folder and then visit this URL  localhost/displaySingleUser/    You should see information displayed about a user in our “fake” db, including their favorite food and restaurant.
+
+
+## Fake database
+
+In order to make using and learning from this project as easy as possible, we have not included a real database. Instead, we created a bit of a fake database by putting some data into PHP arrays. In the future we're thinking we'll fork this project and add a MySQL database.
 
 
 ## What’s missing?
 
--Dependency Injection Container (coming soon)
-
--Automated tests. This is a very important part of modern PHP development (coming soon)
+-Automated tests. This is a very important part of modern PHP development (coming soon, maybe in a fork of this project?)
 
 -External dependencies using Composer. Most production web applications use “packages” from 3rd parties; this can save you a lot of time. Instead of writing code to, for example, get a file from an Amazon AWS S3 bucket, you could use Amazon’s “package”. Composer is a tool that helps manage these packages, and is used in most PHP projects.
 
