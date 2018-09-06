@@ -8,32 +8,22 @@ class User
     /**
      * @var string
      */
-    private $name = null;
+    private $name;
 
     /**
      * @var int
      */
-    private $age = null;
-
-    /**
-     * @var string
-     */
-    private $favoriteRestaurantName = null;
-
-    /**
-     * @var string
-     */
-    private $favoriteFoodName = null;
+    private $age;
 
     /**
      * @var int
      */
-    private $favoriteRestaurantId = null;
+    private $favoriteRestaurantId;
 
     /**
      * @var int
      */
-    private $favoriteFoodId = null;
+    private $favoriteFoodId;
 
     // endregion
 
@@ -64,27 +54,11 @@ class User
     }
 
     /**
-     * @param string $favoriteRestaurantName
-     */
-    public function setfavoriteRestaurantName($favoriteRestaurantName)
-    {
-        $this->favoriteRestaurantName = $favoriteRestaurantName;
-    }
-
-    /**
      * @param int $favoriteFoodId
      */
     public function setFavoriteFoodId($favoriteFoodId)
     {
         $this->favoriteFoodId = $favoriteFoodId;
-    }
-
-    /**
-     * @param string $favoriteFoodName
-     */
-    public function setfavoriteFoodName($favoriteFoodName)
-    {
-        $this->favoriteFoodName = $favoriteFoodName;
     }
 
     // endregion
@@ -116,27 +90,11 @@ class User
     }
 
     /**
-     * @return string
-     */
-    public function getFavoriteResturantName()
-    {
-        return $this->favoriteRestaurantName;
-    }
-
-    /**
      * @return int
      */
     public function getFavoriteFoodId()
     {
         return $this->favoriteFoodId;
-    }
-
-    /**
-     * @return string
-     */
-    public function getfavoriteFoodName()
-    {
-        return $this->favoriteFoodName;
     }
 
     // endregion

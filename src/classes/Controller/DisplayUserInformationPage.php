@@ -58,7 +58,7 @@ class DisplayUserInformationPage
     {
         // create user's object and set user's name and age to user object
         $userObject = UserFactory::createUser();
-        $userRow = $this->usersTransactions->getUserById(1);
+        $userRow = $this->usersTransactions->getUserById(2);
         $userObject->setName($userRow["userRow"]["name"]);
         $userObject->setAge($userRow["userRow"]["age"]);
         $userObject->setFavoriteRestaurantId($userRow["userRow"]["favoriteRestaurantId"]);
@@ -75,18 +75,14 @@ class DisplayUserInformationPage
         $userfavoriteFoodIdRow = $this->foodsTransactions->getFoodById($userObject->getFavoriteFoodId());
         $foodObject->setName($userfavoriteFoodIdRow["foodRow"]["name"]);
 
-        // set values to user using food and resturant objects
-        $userObject->setfavoriteRestaurantName($restaurantObject->getName());
-        $userObject->setfavoriteFoodName($foodObject->getName());
-
         // response with vars
         $this->response->setView('displayUserInformation/index.php');
         $this->response->setVars(
             array(
                 "name" => $userObject->getName(),
                 "age" => $userObject->getAge(),
-                "restaurant" => $userObject->getFavoriteResturantName(),
-                "food" => $userObject->getfavoriteFoodName()
+                "restaurant" => $restaurantObject->getName(),
+                "food" => $foodObject->getName()
             )
         );
 
