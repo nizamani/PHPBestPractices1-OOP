@@ -1,5 +1,5 @@
 <?php
-namespace PHPBestPractices1OOP\Domain\Users;
+namespace PHPBestPractices1OOP\Domain\User;
 
 class UserFactory
 {

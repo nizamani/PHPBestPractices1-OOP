@@ -1,7 +1,7 @@
 <?php
-namespace PHPBestPractices1OOP\Domain\Foods;
+namespace PHPBestPractices1OOP\Domain\Restaurant;
 
-class Food
+class Restaurant
 {
     /**
      * @var string

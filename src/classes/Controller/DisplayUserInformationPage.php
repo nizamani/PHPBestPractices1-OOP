@@ -6,9 +6,9 @@ use PHPBestPractices1OOP\Domain\RestaurantsTransactions\RestaurantsTransactions;
 use PHPBestPractices1OOP\Domain\UsersTransactions\UsersTransactions;
 use PHPBestPractices1OOP\Request\Request;
 use PHPBestPractices1OOP\Response\Response;
-use PHPBestPractices1OOP\Domain\Users\UserFactory;
-use PHPBestPractices1OOP\Domain\Restaurants\RestaurantFactory;
-use PHPBestPractices1OOP\Domain\Foods\FoodFactory;
+use PHPBestPractices1OOP\Domain\User\UserFactory;
+use PHPBestPractices1OOP\Domain\Restaurant\RestaurantFactory;
+use PHPBestPractices1OOP\Domain\Food\FoodFactory;
 
 class DisplayUserInformationPage
 {

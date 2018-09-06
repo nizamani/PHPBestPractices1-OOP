@@ -1,5 +1,5 @@
 <?php
-namespace PHPBestPractices1OOP\Domain\Foods;
+namespace PHPBestPractices1OOP\Domain\Food;
 
 class FoodFactory
 {
