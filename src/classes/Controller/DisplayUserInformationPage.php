@@ -58,7 +58,6 @@ class DisplayUserInformationPage
     {
         // create user object
         $userObject = UserFactory::createUser();
-
         // get user data from the db and set to User object
         $userRow = $this->usersTransactions->getUserById(2);
         $userObject->setName($userRow["userRow"]["name"]);
@@ -68,7 +67,6 @@ class DisplayUserInformationPage
 
         // create restaurant object
         $restaurantObject = RestaurantFactory::createResturant();
-
         // get restaurant data from the db and set to Restaurant object
         $userfavoriteRestaurantIdRow =
             $this->restaurantsTransactions->getRestaurantById($userObject->getFavoriteResturantId());
@@ -76,7 +74,6 @@ class DisplayUserInformationPage
 
         // create food object
         $foodObject = FoodFactory::createFood();
-
         // get food data from the db and set to Food object
         $userfavoriteFoodIdRow = $this->foodsTransactions->getFoodById($userObject->getFavoriteFoodId());
         $foodObject->setName($userfavoriteFoodIdRow["foodRow"]["name"]);
