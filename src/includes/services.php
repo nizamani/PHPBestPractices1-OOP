@@ -5,11 +5,9 @@ $di = new PHPBestPractices1OOP\Di\Di($GLOBALS);
 $di->set('router', function () use ($di) {
     $router = new PHPBestPractices1OOP\Router\Router(basename(dirname(__DIR__) . "/pages"));
     $router->setRoutes(array());
-    $router->setRoutes(
-        array(
-            // add a route that points to a container service name
-            "/displayUserInformation" =>
-                "Controller\DisplayUserInformationPage",
+    $router->setRoutes(array(
+        // add a route that points to a container service name
+        "/displayUserInformation" => "Controller\DisplayUserInformationPage",
     ));
 
     return $router;
