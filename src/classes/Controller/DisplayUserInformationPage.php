@@ -62,33 +62,33 @@ class DisplayUserInformationPage
         $foodObject = FoodFactory::createFood();
 
         // get user on row 1 from db.php
-        $userRow = $this->usersTransactions->getUserById(2);
+        $userRow = $this->usersTransactions->getUserById(1);
 
         // success in getting user's row from db, set user's properties for display
         if ($userRow["success"] === true) {
             $hasError = false;
 
             // get user's resturant and favorite food ids
-            $userFavoriteRestaurantRow =
-                $this->restaurantsTransactions->getRestaurantById($userRow["userRow"]["favoriteFood"]);
-            $userFavoriteFoodRow = $this->foodsTransactions->getFoodById($userRow["userRow"]["favoriteRestaurant"]);
+            $userfavoriteRestaurantIdRow =
+                $this->restaurantsTransactions->getRestaurantById($userRow["userRow"]["favoriteFoodId"]);
+            $userfavoriteFoodIdRow = $this->foodsTransactions->getFoodById($userRow["userRow"]["favoriteRestaurantId"]);
 
             $userObject->setName($userRow["userRow"]["name"]);
             $userObject->setAge($userRow["userRow"]["age"]);
 
             // success in getting favorite restaurant, set favorite restaurant namme to favorite resturant object
-            if ($userFavoriteRestaurantRow["success"] === true) {
-                $restaurantObject->setName($userFavoriteRestaurantRow["restaurantRow"]["name"]);
+            if ($userfavoriteRestaurantIdRow["success"] === true) {
+                $restaurantObject->setName($userfavoriteRestaurantIdRow["restaurantRow"]["name"]);
             }
 
             // success in getting favorite food, set favorite food values to food object
-            if ($userFavoriteFoodRow["success"] === true) {
-                $foodObject->setName($userFavoriteFoodRow["foodRow"]["name"]);
+            if ($userfavoriteFoodIdRow["success"] === true) {
+                $foodObject->setName($userfavoriteFoodIdRow["foodRow"]["name"]);
             }
 
             // set values to user using food and resturant objects
-            $userObject->setFavoriteRestaurant($restaurantObject->getName());
-            $userObject->setFavoriteFood($foodObject->getName());
+            $userObject->setfavoriteRestaurantId($restaurantObject->getName());
+            $userObject->setfavoriteFoodId($foodObject->getName());
 
             // else problem getting user from db
         } else {
@@ -102,7 +102,7 @@ class DisplayUserInformationPage
                 "name" => $userObject->getName(),
                 "age" => $userObject->getAge(),
                 "restaurant" => $userObject->getFavoriteResturant(),
-                "food" => $userObject->getFavoriteFood(),
+                "food" => $userObject->getfavoriteFoodId(),
                 "hasError" => $hasError
             )
         );
