@@ -27,7 +27,7 @@ class User
 
     // endregion
 
-    // region get
+    // region set
 
     /**
      * @param string $name

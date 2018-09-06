@@ -56,26 +56,32 @@ class DisplayUserInformationPage
 
     public function __invoke()
     {
-        // create user's object and set user's name and age to user object
+        // create user object
         $userObject = UserFactory::createUser();
+
+        // get user data from the db and set to User object
         $userRow = $this->usersTransactions->getUserById(2);
         $userObject->setName($userRow["userRow"]["name"]);
         $userObject->setAge($userRow["userRow"]["age"]);
         $userObject->setFavoriteRestaurantId($userRow["userRow"]["favoriteRestaurantId"]);
         $userObject->setFavoriteFoodId($userRow["userRow"]["favoriteFoodId"]);
 
-        // get resturant object and set restaurant name to user's favorite restaurant
+        // create restaurant object
         $restaurantObject = RestaurantFactory::createResturant();
+
+        // get restaurant data from the db and set to Restaurant object
         $userfavoriteRestaurantIdRow =
             $this->restaurantsTransactions->getRestaurantById($userObject->getFavoriteResturantId());
         $restaurantObject->setName($userfavoriteRestaurantIdRow["restaurantRow"]["name"]);
 
-        // get food object and set food name to user's favorite food
+        // create food object
         $foodObject = FoodFactory::createFood();
+
+        // get food data from the db and set to Food object
         $userfavoriteFoodIdRow = $this->foodsTransactions->getFoodById($userObject->getFavoriteFoodId());
         $foodObject->setName($userfavoriteFoodIdRow["foodRow"]["name"]);
 
-        // response with vars
+        // this will display the user's information
         $this->response->setView('displayUserInformation/index.php');
         $this->response->setVars(
             array(
