@@ -8,7 +8,7 @@ $di->set('router', function () use ($di) {
     $router->setRoutes(
         array(
             // add a route that points to a container service name
-            DIRECTORY_SEPARATOR . $GLOBALS["projectUrl"]."/displayUserInformation" =>
+            "/displayUserInformation" =>
                 "Controller\DisplayUserInformationPage",
     ));
 

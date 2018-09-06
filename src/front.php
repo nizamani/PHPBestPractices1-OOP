@@ -3,9 +3,6 @@ require_once("fakedatabase/db.php");
 require_once("includes/setup.php");
 require_once("includes/services.php");
 
-// todo set project url at the top
-$projectUrl = "studenthome";
-
 // get the shared router service
 $router = $di->get('router');
 
