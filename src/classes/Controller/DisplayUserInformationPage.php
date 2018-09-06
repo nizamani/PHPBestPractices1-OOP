@@ -64,36 +64,27 @@ class DisplayUserInformationPage
         // get user on row 1 from db.php
         $userRow = $this->usersTransactions->getUserById(1);
 
-        // success in getting user's row from db, set user's properties for display
-        if ($userRow["success"] === true) {
-            $hasError = false;
+        // get user's resturant and favorite food ids
+        $userfavoriteRestaurantIdRow =
+            $this->restaurantsTransactions->getRestaurantById($userRow["userRow"]["favoriteFoodId"]);
+        $userfavoriteFoodIdRow = $this->foodsTransactions->getFoodById($userRow["userRow"]["favoriteRestaurantId"]);
 
-            // get user's resturant and favorite food ids
-            $userfavoriteRestaurantIdRow =
-                $this->restaurantsTransactions->getRestaurantById($userRow["userRow"]["favoriteFoodId"]);
-            $userfavoriteFoodIdRow = $this->foodsTransactions->getFoodById($userRow["userRow"]["favoriteRestaurantId"]);
+        $userObject->setName($userRow["userRow"]["name"]);
+        $userObject->setAge($userRow["userRow"]["age"]);
 
-            $userObject->setName($userRow["userRow"]["name"]);
-            $userObject->setAge($userRow["userRow"]["age"]);
-
-            // success in getting favorite restaurant, set favorite restaurant namme to favorite resturant object
-            if ($userfavoriteRestaurantIdRow["success"] === true) {
-                $restaurantObject->setName($userfavoriteRestaurantIdRow["restaurantRow"]["name"]);
-            }
-
-            // success in getting favorite food, set favorite food values to food object
-            if ($userfavoriteFoodIdRow["success"] === true) {
-                $foodObject->setName($userfavoriteFoodIdRow["foodRow"]["name"]);
-            }
-
-            // set values to user using food and resturant objects
-            $userObject->setfavoriteRestaurantId($restaurantObject->getName());
-            $userObject->setfavoriteFoodId($foodObject->getName());
-
-            // else problem getting user from db
-        } else {
-            $hasError = true;
+        // success in getting favorite restaurant, set favorite restaurant namme to favorite resturant object
+        if ($userfavoriteRestaurantIdRow["success"] === true) {
+            $restaurantObject->setName($userfavoriteRestaurantIdRow["restaurantRow"]["name"]);
         }
+
+        // success in getting favorite food, set favorite food values to food object
+        if ($userfavoriteFoodIdRow["success"] === true) {
+            $foodObject->setName($userfavoriteFoodIdRow["foodRow"]["name"]);
+        }
+
+        // set values to user using food and resturant objects
+        $userObject->setfavoriteRestaurantId($restaurantObject->getName());
+        $userObject->setfavoriteFoodId($foodObject->getName());
 
         // response with vars
         $this->response->setView('displayUserInformation/index.php');
@@ -102,8 +93,7 @@ class DisplayUserInformationPage
                 "name" => $userObject->getName(),
                 "age" => $userObject->getAge(),
                 "restaurant" => $userObject->getFavoriteResturant(),
-                "food" => $userObject->getfavoriteFoodId(),
-                "hasError" => $hasError
+                "food" => $userObject->getfavoriteFoodId()
             )
         );
 
