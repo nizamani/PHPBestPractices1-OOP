@@ -61,16 +61,18 @@ class DisplayUserInformationPage
         $userRow = $this->usersTransactions->getUserById(1);
         $userObject->setName($userRow["userRow"]["name"]);
         $userObject->setAge($userRow["userRow"]["age"]);
+        $userObject->setFavoriteRestaurantId($userRow["userRow"]["favoriteRestaurantId"]);
+        $userObject->setFavoriteFoodId($userRow["userRow"]["favoriteFoodId"]);
 
         // get resturant object and set restaurant name to user's favorite restaurant
         $restaurantObject = RestaurantFactory::createResturant();
         $userfavoriteRestaurantIdRow =
-            $this->restaurantsTransactions->getRestaurantById($userRow["userRow"]["favoriteFoodId"]);
+            $this->restaurantsTransactions->getRestaurantById($userObject->getFavoriteResturantId());
         $restaurantObject->setName($userfavoriteRestaurantIdRow["restaurantRow"]["name"]);
 
         // get food object and set food name to user's favorite food
         $foodObject = FoodFactory::createFood();
-        $userfavoriteFoodIdRow = $this->foodsTransactions->getFoodById($userRow["userRow"]["favoriteRestaurantId"]);
+        $userfavoriteFoodIdRow = $this->foodsTransactions->getFoodById($userObject->getFavoriteFoodId());
         $foodObject->setName($userfavoriteFoodIdRow["foodRow"]["name"]);
 
         // set values to user using food and resturant objects
