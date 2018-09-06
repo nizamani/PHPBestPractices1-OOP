@@ -72,15 +72,11 @@ class DisplayUserInformationPage
         $userObject->setName($userRow["userRow"]["name"]);
         $userObject->setAge($userRow["userRow"]["age"]);
 
-        // success in getting favorite restaurant, set favorite restaurant namme to favorite resturant object
-        if ($userfavoriteRestaurantIdRow["success"] === true) {
-            $restaurantObject->setName($userfavoriteRestaurantIdRow["restaurantRow"]["name"]);
-        }
+        // set favorite restaurant namme to favorite resturant object
+        $restaurantObject->setName($userfavoriteRestaurantIdRow["restaurantRow"]["name"]);
 
-        // success in getting favorite food, set favorite food values to food object
-        if ($userfavoriteFoodIdRow["success"] === true) {
-            $foodObject->setName($userfavoriteFoodIdRow["foodRow"]["name"]);
-        }
+        // set favorite food values to food object
+        $foodObject->setName($userfavoriteFoodIdRow["foodRow"]["name"]);
 
         // set values to user using food and resturant objects
         $userObject->setfavoriteRestaurantId($restaurantObject->getName());
