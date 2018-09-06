@@ -3,18 +3,11 @@ require_once("fakedatabase/db.php");
 require_once("includes/setup.php");
 require_once("includes/services.php");
 
-use PHPBestPractices1OOP\Router\Router;
-
 // todo set project url at the top
 $projectUrl = "studenthome";
 
 // get the shared router service
 $router = $di->get('router');
-
-// set routes
-$router->setRoutes(array(
-    DIRECTORY_SEPARATOR . $projectUrl."/displayUserInformation" => "pages/displayUserInformation/index.php",
-));
 
 // match against the url path
 $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
