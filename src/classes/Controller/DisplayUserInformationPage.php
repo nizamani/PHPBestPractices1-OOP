@@ -56,31 +56,26 @@ class DisplayUserInformationPage
 
     public function __invoke()
     {
-        // dependencies
+        // create user's object and set user's name and age to user object
         $userObject = UserFactory::createUser();
-        $restaurantObject = RestaurantFactory::createResturant();
-        $foodObject = FoodFactory::createFood();
-
-        // get user on row 1 from db.php
         $userRow = $this->usersTransactions->getUserById(1);
-
-        // get user's resturant and favorite food ids
-        $userfavoriteRestaurantIdRow =
-            $this->restaurantsTransactions->getRestaurantById($userRow["userRow"]["favoriteFoodId"]);
-        $userfavoriteFoodIdRow = $this->foodsTransactions->getFoodById($userRow["userRow"]["favoriteRestaurantId"]);
-
         $userObject->setName($userRow["userRow"]["name"]);
         $userObject->setAge($userRow["userRow"]["age"]);
 
-        // set favorite restaurant namme to favorite resturant object
+        // get resturant object and set restaurant name to user's favorite restaurant
+        $restaurantObject = RestaurantFactory::createResturant();
+        $userfavoriteRestaurantIdRow =
+            $this->restaurantsTransactions->getRestaurantById($userRow["userRow"]["favoriteFoodId"]);
         $restaurantObject->setName($userfavoriteRestaurantIdRow["restaurantRow"]["name"]);
 
-        // set favorite food values to food object
+        // get food object and set food name to user's favorite food
+        $foodObject = FoodFactory::createFood();
+        $userfavoriteFoodIdRow = $this->foodsTransactions->getFoodById($userRow["userRow"]["favoriteRestaurantId"]);
         $foodObject->setName($userfavoriteFoodIdRow["foodRow"]["name"]);
 
         // set values to user using food and resturant objects
-        $userObject->setfavoriteRestaurantId($restaurantObject->getName());
-        $userObject->setfavoriteFoodId($foodObject->getName());
+        $userObject->setfavoriteRestaurantName($restaurantObject->getName());
+        $userObject->setfavoriteFoodName($foodObject->getName());
 
         // response with vars
         $this->response->setView('displayUserInformation/index.php');
@@ -88,8 +83,8 @@ class DisplayUserInformationPage
             array(
                 "name" => $userObject->getName(),
                 "age" => $userObject->getAge(),
-                "restaurant" => $userObject->getFavoriteResturant(),
-                "food" => $userObject->getfavoriteFoodId()
+                "restaurant" => $userObject->getFavoriteResturantName(),
+                "food" => $userObject->getfavoriteFoodName()
             )
         );
 
