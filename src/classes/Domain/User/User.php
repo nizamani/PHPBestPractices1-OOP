@@ -61,7 +61,7 @@ class User
     /**
      * @param $favoriteRestaurant
      */
-    public function setFavoriteRestaurant($favoriteRestaurant)
+    public function setFavoriteRestaurant(Restaurant $favoriteRestaurant)
     {
         $this->favoriteRestaurant = $favoriteRestaurant;
     }
@@ -85,7 +85,7 @@ class User
     /**
      * @param $favoriteFood
      */
-    public function setFavoriteFood($favoriteFood)
+    public function setFavoriteFood(Food $favoriteFood)
     {
         $this->favoriteFood = $favoriteFood;
     }

@@ -21,7 +21,7 @@ class NotFoundPage
      * @param Request $request
      * @param Response $response
      */
-    public function __construct($request, $response)
+    public function __construct(Request $request, Response $response)
     {
         $this->request = $request;
         $this->response = $response;
