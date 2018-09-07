@@ -6,18 +6,31 @@ use PHPBestPractices1OOP\Domain\FoodsTransactions\FoodsTransactions;
 class FoodFactory
 {
     /**
+     * @var FoodsTransactions
+     */
+    private $foodsTransactions;
+
+    /**
+     * FoodFactory constructor.
+     * @param FoodsTransactions $foodsTransactions
+     */
+    public function __construct($foodsTransactions)
+    {
+        $this->foodsTransactions = $foodsTransactions;
+    }
+
+    /**
      * create an instance of Food class
      *
      * @param int $foodId
-     * @param FoodsTransactions $foodsTransactions
      * @return Food
      */
-    public static function createFood($foodId, $foodsTransactions)
+    public function createFood($foodId)
     {
         $foodObject = new Food();
 
         // get food data from the db and set to food object
-        $foodRow = $foodsTransactions->getFoodById($foodId);
+        $foodRow = $this->foodsTransactions->getFoodById($foodId);
         $foodObject->setName($foodRow["foodRow"]["name"]);
 
         return $foodObject;

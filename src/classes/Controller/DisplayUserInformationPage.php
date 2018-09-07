@@ -1,9 +1,6 @@
 <?php
 namespace PHPBestPractices1OOP\Controller;
 
-use PHPBestPractices1OOP\Domain\FoodsTransactions\FoodsTransactions;
-use PHPBestPractices1OOP\Domain\RestaurantsTransactions\RestaurantsTransactions;
-use PHPBestPractices1OOP\Domain\UsersTransactions\UsersTransactions;
 use PHPBestPractices1OOP\Request\Request;
 use PHPBestPractices1OOP\Response\Response;
 use PHPBestPractices1OOP\Domain\User\UserFactory;
@@ -21,47 +18,30 @@ class DisplayUserInformationPage
     private $request;
 
     /**
-     * @var UsersTransactions
+     * @var UserFactory
      */
-    private $usersTransactions;
-
-    /**
-     * @var RestaurantsTransactions
-     */
-    private $restaurantsTransactions;
-
-    /**
-     * @var FoodsTransactions
-     */
-    private $foodsTransactions;
+    private $userFactory;
 
     /**
      * DisplayUserInformationPage constructor.
      * @param Request $request
      * @param Response $response
-     * @param UsersTransactions $usersTransactions
-     * @param RestaurantsTransactions $restaurantsTransactions
-     * @param FoodsTransactions $foodsTransactions
+     * @param UserFactory $userFactory
      */
     public function __construct(
-        $request, $response, $usersTransactions, $restaurantsTransactions, $foodsTransactions
+        $request,
+        $response,
+        $userFactory
     ) {
         $this->response = $response;
         $this->request = $request;
-        $this->usersTransactions = $usersTransactions;
-        $this->restaurantsTransactions = $restaurantsTransactions;
-        $this->foodsTransactions = $foodsTransactions;
+        $this->userFactory = $userFactory;
     }
 
     public function __invoke()
     {
         // create user object
-        $userObject = UserFactory::createUser(
-            2,
-            $this->usersTransactions,
-            $this->restaurantsTransactions,
-            $this->foodsTransactions
-        );
+        $userObject = $this->userFactory->createUser(2);
 
         // this will display the user's information
         $this->response->setView('displayUserInformation/index.php');

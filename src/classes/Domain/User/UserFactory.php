@@ -1,9 +1,6 @@
 <?php
 namespace PHPBestPractices1OOP\Domain\User;
 
-use PHPBestPractices1OOP\Domain\Food\Food;
-use PHPBestPractices1OOP\Domain\FoodsTransactions\FoodsTransactions;
-use PHPBestPractices1OOP\Domain\RestaurantsTransactions\RestaurantsTransactions;
 use PHPBestPractices1OOP\Domain\UsersTransactions\UsersTransactions;
 use PHPBestPractices1OOP\Domain\Restaurant\RestaurantFactory;
 use PHPBestPractices1OOP\Domain\Food\FoodFactory;
@@ -11,33 +8,55 @@ use PHPBestPractices1OOP\Domain\Food\FoodFactory;
 class UserFactory
 {
     /**
+     * @var UsersTransactions
+     */
+    private $usersTransactions;
+
+    /**
+     * @var FoodFactory
+     */
+    private $foodFactory;
+
+    /**
+     * @var RestaurantFactory
+     */
+    private $restaurantFactory;
+
+    /**
+     * UserFactory constructor.
+     * @param UsersTransactions $usersTransactions
+     * @param FoodFactory $foodFactory
+     * @param RestaurantFactory $restaurantFactory
+     */
+    public function __construct($usersTransactions, $foodFactory, $restaurantFactory)
+    {
+        $this->usersTransactions = $usersTransactions;
+        $this->foodFactory = $foodFactory;
+        $this->restaurantFactory = $restaurantFactory;
+    }
+
+    /**
      * create an instance of User class
      *
      * @param int $userId
-     * @param UsersTransactions $usersTransactions
-     * @param RestaurantsTransactions $restaurantsTransactions
-     * @param FoodsTransactions $foodsTransactions
      * @return User
      */
-    public static function createUser($userId, $usersTransactions, $restaurantsTransactions, $foodsTransactions)
+    public function createUser($userId)
     {
         $userObject = new User();
 
         // get user data from the db and set to User object
-        $userRow = $usersTransactions->getUserById($userId);
+        $userRow = $this->usersTransactions->getUserById($userId);
         $userObject->setName($userRow["userRow"]["name"]);
         $userObject->setAge($userRow["userRow"]["age"]);
         $userObject->setFavoriteRestaurantId($userRow["userRow"]["favoriteRestaurantId"]);
         $userObject->setFavoriteFoodId($userRow["userRow"]["favoriteFoodId"]);
 
         // create restaurant object for user's favorite restaurant
-        $restaurantObject = RestaurantFactory::createResturant(
-            $userObject->getFavoriteRestaurantId(),
-            $restaurantsTransactions
-        );
+        $restaurantObject = $this->restaurantFactory->createResturant($userObject->getFavoriteRestaurantId());
 
         // create food object
-        $foodObject = FoodFactory::createFood($userObject->getFavoriteFoodId(), $foodsTransactions);
+        $foodObject = $this->foodFactory->createFood($userObject->getFavoriteFoodId());
 
         // set user favorite food and favorite restaurant objects
         $userObject->setFavoriteRestaurant($restaurantObject);
