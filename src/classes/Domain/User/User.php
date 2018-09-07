@@ -1,6 +1,9 @@
 <?php
 namespace PHPBestPractices1OOP\Domain\User;
 
+use PHPBestPractices1OOP\Domain\Food\Food;
+use PHPBestPractices1OOP\Domain\Restaurant\Restaurant;
+
 class User
 {
     // region vars
@@ -25,6 +28,16 @@ class User
      */
     private $favoriteFoodId;
 
+    /**
+     * @var Restaurant
+     */
+    private $favoriteRestaurant;
+
+    /**
+     * @var Food
+     */
+    private $favoriteFood;
+
     // endregion
 
     // region set
@@ -46,6 +59,14 @@ class User
     }
 
     /**
+     * @param $favoriteRestaurant
+     */
+    public function setFavoriteRestaurant($favoriteRestaurant)
+    {
+        $this->favoriteRestaurant = $favoriteRestaurant;
+    }
+
+    /**
      * @param int $favoriteRestaurantId
      */
     public function setFavoriteRestaurantId($favoriteRestaurantId)
@@ -59,6 +80,14 @@ class User
     public function setFavoriteFoodId($favoriteFoodId)
     {
         $this->favoriteFoodId = $favoriteFoodId;
+    }
+
+    /**
+     * @param $favoriteFood
+     */
+    public function setFavoriteFood($favoriteFood)
+    {
+        $this->favoriteFood = $favoriteFood;
     }
 
     // endregion
@@ -82,11 +111,27 @@ class User
     }
 
     /**
+     * @return Restaurant
+     */
+    public function getFavoriteRestaurant()
+    {
+        return $this->favoriteRestaurant;
+    }
+
+    /**
      * @return int
      */
-    public function getFavoriteResturantId()
+    public function getFavoriteRestaurantId()
     {
         return $this->favoriteRestaurantId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFavoriteRestaurantName()
+    {
+        return $this->favoriteRestaurant->getName();
     }
 
     /**
@@ -95,6 +140,22 @@ class User
     public function getFavoriteFoodId()
     {
         return $this->favoriteFoodId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFavoriteFoodName()
+    {
+        return $this->favoriteFood->getName();
+    }
+
+    /**
+     * @return Food
+     */
+    public function getFavoriteFood()
+    {
+        return $this->favoriteFood;
     }
 
     // endregion

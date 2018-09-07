@@ -38,13 +38,26 @@ $di->set("foodsTransactions", function () use ($di) {
     return new PHPBestPractices1OOP\Domain\FoodsTransactions\FoodsTransactions($GLOBALS["foods"]);
 });
 
+// set a container service for user factory
+$di->set("userFactory", function () use ($di) {
+    return new PHPBestPractices1OOP\Domain\User\UserFactory();
+});
+
+// set a container service for restaurant factory
+$di->set("restaurantFactory", function () use ($di) {
+    return new PHPBestPractices1OOP\Domain\Restaurant\RestaurantFactory(
+        $di->get("restaurantsTransactions")
+    );
+});
+
+// set a container service for food factory
+$di->set("foodFactory", function () use ($di) {
+    return new PHPBestPractices1OOP\Domain\Food\FoodFactory();
+});
+
 // display user information service
 $di->set('Controller\DisplayUserInformationPage', function () use ($di) {
     return new PHPBestPractices1OOP\Controller\DisplayUserInformationPage(
-        $di->get("request"),
-        $di->get("response"),
-        $di->get("usersTransactions"),
-        $di->get("restaurantsTransactions"),
-        $di->get("foodsTransactions")
+        $di->get("request"), $di->get("response"), $di->get("usersTransactions"), $di->get("restaurantsTransactions"), $di->get("foodsTransactions")
     );
 });
