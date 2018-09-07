@@ -28,8 +28,11 @@ class UserFactory
      * @param FoodFactory $foodFactory
      * @param RestaurantFactory $restaurantFactory
      */
-    public function __construct($usersTransactions, $foodFactory, $restaurantFactory)
-    {
+    public function __construct(
+        UsersTransactions $usersTransactions,
+        FoodFactory $foodFactory,
+        RestaurantFactory $restaurantFactory
+    ) {
         $this->usersTransactions = $usersTransactions;
         $this->foodFactory = $foodFactory;
         $this->restaurantFactory = $restaurantFactory;
@@ -52,14 +55,12 @@ class UserFactory
         $userObject->setFavoriteRestaurantId($userRow["userRow"]["favoriteRestaurantId"]);
         $userObject->setFavoriteFoodId($userRow["userRow"]["favoriteFoodId"]);
 
-        // create restaurant object for user's favorite restaurant
+        // create restaurant object and set user's favorite restaurant
         $restaurantObject = $this->restaurantFactory->createResturant($userObject->getFavoriteRestaurantId());
-
-        // create food object
-        $foodObject = $this->foodFactory->createFood($userObject->getFavoriteFoodId());
-
-        // set user favorite food and favorite restaurant objects
         $userObject->setFavoriteRestaurant($restaurantObject);
+
+        // create food object and set user's favorite food
+        $foodObject = $this->foodFactory->createFood($userObject->getFavoriteFoodId());
         $userObject->setFavoriteFood($foodObject);
 
         return $userObject;

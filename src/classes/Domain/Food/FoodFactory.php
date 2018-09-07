@@ -14,7 +14,7 @@ class FoodFactory
      * FoodFactory constructor.
      * @param FoodsTransactions $foodsTransactions
      */
-    public function __construct($foodsTransactions)
+    public function __construct(FoodsTransactions  $foodsTransactions)
     {
         $this->foodsTransactions = $foodsTransactions;
     }

@@ -29,9 +29,9 @@ class DisplayUserInformationPage
      * @param UserFactory $userFactory
      */
     public function __construct(
-        $request,
-        $response,
-        $userFactory
+        Request $request,
+        Response $response,
+        UserFactory $userFactory
     ) {
         $this->response = $response;
         $this->request = $request;
