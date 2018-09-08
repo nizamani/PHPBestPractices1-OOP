@@ -5,7 +5,7 @@ use PHPBestPractices1OOP\Request\Request;
 use PHPBestPractices1OOP\Response\Response;
 use PHPBestPractices1OOP\Domain\User\UserFactory;
 
-class DisplayUserInformationPage
+class DisplayAllUsersInformationPage
 {
     /**
      * @var Response
@@ -23,7 +23,7 @@ class DisplayUserInformationPage
     private $userFactory;
 
     /**
-     * DisplayUserInformationPage constructor.
+     * DisplayAllUsersInformationPage constructor.
      * @param Request $request
      * @param Response $response
      * @param UserFactory $userFactory
@@ -40,17 +40,27 @@ class DisplayUserInformationPage
 
     public function __invoke()
     {
-        // create user object
-        $userObject = $this->userFactory->createUser(2);
+        // vars
+        $usersDisplayArray = array();
+        $userIds = array(1, 2);
 
-        // this will display the user's information
-        $this->response->setView("displayUserInformation/index.php");
-        $this->response->setVars(
-            array(
+        // create user object
+        $usersCollection = $this->userFactory->createUsersCollection($userIds);
+
+        foreach ($usersCollection as $userObject) {
+            $usersDisplayArray[] = array(
                 "name" => $userObject->getName(),
                 "age" => $userObject->getAge(),
                 "restaurant" => $userObject->getFavoriteRestaurantName(),
                 "food" => $userObject->getFavoriteFoodName()
+            );
+        }
+
+        // this will display the user's information
+        $this->response->setView("displayAllUsersInformation/index.php");
+        $this->response->setVars(
+            array(
+                "userDisplayArray" => $usersDisplayArray
             )
         );
 

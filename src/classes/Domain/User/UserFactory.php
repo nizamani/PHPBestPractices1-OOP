@@ -65,4 +65,23 @@ class UserFactory
 
         return $userObject;
     }
+
+    /**
+     * create collection of User class instances for user's ids
+     *
+     * @param array $userIdsArray
+     * @return array
+     */
+    public function createUsersCollection($userIdsArray)
+    {
+        // users collection
+        $usersCollection = array();
+
+        // loop through users array
+        foreach ($userIdsArray as $userId) {
+            $usersCollection[] = $this->createUser($userId);
+        }
+
+        return $usersCollection;
+    }
 }
