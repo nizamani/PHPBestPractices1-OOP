@@ -9,6 +9,11 @@ class User
     // region vars
 
     /**
+     * @var int
+     */
+    private $userId;
+
+    /**
      * @var string
      */
     private $name;
@@ -17,16 +22,6 @@ class User
      * @var int
      */
     private $age;
-
-    /**
-     * @var int
-     */
-    private $favoriteRestaurantId;
-
-    /**
-     * @var int
-     */
-    private $favoriteFoodId;
 
     /**
      * @var Restaurant
@@ -41,6 +36,14 @@ class User
     // endregion
 
     // region set
+
+    /**
+     * @param $userId
+     */
+    public function setId($userId)
+    {
+        $this->userId = $userId;
+    }
 
     /**
      * @param string $name
@@ -67,22 +70,6 @@ class User
     }
 
     /**
-     * @param int $favoriteRestaurantId
-     */
-    public function setFavoriteRestaurantId($favoriteRestaurantId)
-    {
-        $this->favoriteRestaurantId = $favoriteRestaurantId;
-    }
-
-    /**
-     * @param int $favoriteFoodId
-     */
-    public function setFavoriteFoodId($favoriteFoodId)
-    {
-        $this->favoriteFoodId = $favoriteFoodId;
-    }
-
-    /**
      * @param $favoriteFood
      */
     public function setFavoriteFood(Food $favoriteFood)
@@ -93,6 +80,11 @@ class User
     // endregion
 
     // region get
+
+    public function getId()
+    {
+        return $this->userId;
+    }
 
     /**
      * @return string
@@ -119,27 +111,11 @@ class User
     }
 
     /**
-     * @return int
-     */
-    public function getFavoriteRestaurantId()
-    {
-        return $this->favoriteRestaurantId;
-    }
-
-    /**
      * @return string
      */
     public function getFavoriteRestaurantName()
     {
         return $this->favoriteRestaurant->getName();
-    }
-
-    /**
-     * @return int
-     */
-    public function getFavoriteFoodId()
-    {
-        return $this->favoriteFoodId;
     }
 
     /**
