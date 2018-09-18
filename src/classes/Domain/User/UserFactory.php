@@ -52,15 +52,13 @@ class UserFactory
         $userRow = $this->usersTransactions->getUserById($userId);
         $userObject->setName($userRow["userRow"]["name"]);
         $userObject->setAge($userRow["userRow"]["age"]);
-        $userObject->setFavoriteRestaurantId($userRow["userRow"]["favoriteRestaurantId"]);
-        $userObject->setFavoriteFoodId($userRow["userRow"]["favoriteFoodId"]);
 
         // create restaurant object and set user's favorite restaurant
-        $restaurantObject = $this->restaurantFactory->createResturant($userObject->getFavoriteRestaurantId());
+        $restaurantObject = $this->restaurantFactory->createResturant($userRow["userRow"]["favoriteRestaurantId"]);
         $userObject->setFavoriteRestaurant($restaurantObject);
 
         // create food object and set user's favorite food
-        $foodObject = $this->foodFactory->createFood($userObject->getFavoriteFoodId());
+        $foodObject = $this->foodFactory->createFood($userRow["userRow"]["favoriteFoodId"]);
         $userObject->setFavoriteFood($foodObject);
 
         return $userObject;
