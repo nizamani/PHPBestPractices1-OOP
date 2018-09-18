@@ -9,6 +9,7 @@ $di->set('router', function () use ($di) {
         // add a route that points to a container service name
         "/displaySingleUser/" => "Controller\DisplayUserInformationPage",
         "/displayAllUsers/" => "Controller\DisplayAllUsersInformationPage",
+        "/greetUser/" => "Controller\GreetSingleUserPage"
     ));
 
     return $router;
@@ -74,6 +75,15 @@ $di->set('Controller\DisplayUserInformationPage', function () use ($di) {
 // display all user information service
 $di->set('Controller\DisplayAllUsersInformationPage', function () use ($di) {
     return new PHPBestPractices1OOP\Controller\DisplayAllUsersInformationPage(
+        $di->get("request"),
+        $di->get("response"),
+        $di->get("userFactory")
+    );
+});
+
+// display greeting message to single user
+$di->set('Controller\GreetSingleUserPage', function () use ($di) {
+    return new PHPBestPractices1OOP\Controller\GreetSingleUserPage(
         $di->get("request"),
         $di->get("response"),
         $di->get("userFactory")

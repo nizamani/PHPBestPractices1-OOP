@@ -7,14 +7,14 @@ $users = array(
 
 // this represents a sql table named `restaurants`
 $resturants = array(
-    array("id" => 1, "name" => "McDonalds"),
-    array("id" => 2, "name" => "Taco Bell"),
-    array("id" => 3, "name" => "KFC")
+   array("id" => 1, "name" => "McDonalds", "averagePrice" => 1, "style" => "American"),
+   array("id" => 2, "name" => "Taco Bell", "averagePrice" => 1, "style" => "Mexican"),
+   array("id" => 3, "name" => "KFC", "averagePrice" => 2, "style" => "American")
 );
 
 // this represents a sql table named `foods`
 $foods = array(
-    array("id" => 1, "name" => "French Fries"),
-    array("id" => 2, "name" => "Hamburger"),
-    array("id" => 3, "name" => "Fried Chicken")
+    array("id" => 1, "name" => "French Fries", "caloriesPerOunce" => "100"),
+    array("id" => 2, "name" => "Hamburger", "caloriesPerOunce" => "135"),
+    array("id" => 3, "name" => "Fried Chicken", "caloriesPerOunce" => "97")
 );
